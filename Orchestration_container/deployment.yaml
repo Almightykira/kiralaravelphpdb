@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: laravel-app
+  labels:
+    app: laravel
+    tier: backend
+    env: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: laravel
+      tier: backend
+      env: dev
+  template:
+    metadata:
+      labels:
+        app: laravel
+        tier: backend
+        env: dev
+    spec:
+      containers:
+      - name: laravel-app
+        image: 192.168.100.250:8086/almightykira/quis-cloud-native-monolith:latest
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+        - name: regcred
